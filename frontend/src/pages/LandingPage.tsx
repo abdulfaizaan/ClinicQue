@@ -56,7 +56,7 @@ export default function LandingPage() {
       </motion.div>
 
       {/* Role Selection Cards */}
-      <motion.div variants={itemVariants} className="grid md:grid-cols-2 gap-8 w-full max-w-4xl z-10">
+      <motion.div variants={itemVariants} className="grid md:grid-cols-3 gap-8 w-full max-w-6xl z-10">
         {/* Left Module - Receptionist */}
         <button
           onClick={() => navigate('/receptionist')}
@@ -94,6 +94,26 @@ export default function LandingPage() {
           </p>
           <div className="bg-white/60 backdrop-blur-md border border-gray-200/60 text-gray-900 font-semibold rounded-lg px-6 py-3 text-sm inline-flex items-center justify-center transition-all shadow-sm group-hover:bg-white/90 group-hover:border-gray-300/60 self-start">
             View Patient Screen →
+          </div>
+        </button>
+
+        {/* Third Module - TV Kiosk */}
+        <button
+          onClick={() => navigate('/kiosk')}
+          className="relative group text-left transition-all duration-300 flex flex-col h-full rounded-2xl p-8 bg-white/70 backdrop-blur-xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(16,185,129,0.12)] hover:-translate-y-1 overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 w-full h-full bg-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none" />
+          <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-emerald-300/20 blur-3xl rounded-full pointer-events-none" />
+
+          <div className="relative bg-gradient-to-br from-emerald-50 to-emerald-100/50 border border-emerald-100 text-emerald-600 w-14 h-14 rounded-xl flex items-center justify-center mb-6 shadow-sm shadow-emerald-200/50 group-hover:scale-110 transition-transform duration-300">
+            <LayoutDashboard size={28} strokeWidth={1.5} />
+          </div>
+          <h2 className="text-2xl font-bold mb-3 text-gray-900">Waiting Room TV</h2>
+          <p className="text-gray-600 mb-8 flex-grow leading-relaxed">
+            The split-screen digital signage for the clinic lobby. Displays "Now Serving" and automated AI voice announcements for all doctors.
+          </p>
+          <div className="bg-white/60 backdrop-blur-md border border-gray-200/60 text-gray-900 font-semibold rounded-lg px-6 py-3 text-sm inline-flex items-center justify-center transition-all shadow-sm group-hover:bg-white/90 group-hover:border-gray-300/60 self-start">
+            View Kiosk Screen →
           </div>
         </button>
       </motion.div>
