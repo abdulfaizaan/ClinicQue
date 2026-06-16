@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #000000;
+  --color-on-primary: #ffffff;
+  --color-ink: #000000;
+  --color-body: #666666;
+  --color-mute: #888888;
+  --color-hairline: #eaeaea;
+  --color-hairline-strong: #888888;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #fafafa;
+  --color-canvas-soft-2: #f5f5f5;
+  --color-link: #0070f3;
+  --color-link-deep: #0761d1;
+  --color-success: #0070f3; /* Vercel uses blue for success sometimes, or #0070f3 for main brand */
+  --color-error: #e00;
+  --color-error-soft: #f7d4d6;
+  --color-warning: #f5a623;
+  --color-warning-soft: #ffefcf;
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-mono: 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+
+  /* Vercel-like subtle shadows */
+  --shadow-level-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-level-2: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-level-3: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-level-4: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --shadow-level-5: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+@layer base {
+  body {
+    @apply bg-canvas-soft text-ink font-sans antialiased selection:bg-link selection:text-white;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary text-on-primary font-medium rounded-md px-4 py-2 hover:bg-black/80 transition-colors shadow-level-1 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+  .btn-primary-sm {
+    @apply bg-primary text-on-primary font-medium rounded-md px-3 py-1.5 text-sm hover:bg-black/80 transition-colors shadow-level-1 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+  .btn-secondary {
+    @apply bg-canvas text-ink font-medium rounded-md px-4 py-2 border border-hairline hover:bg-canvas-soft transition-colors shadow-level-1 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hairline-strong;
+  }
+  .btn-secondary-sm {
+    @apply bg-canvas text-ink font-medium rounded-md px-3 py-1.5 text-sm border border-hairline hover:bg-canvas-soft transition-colors shadow-level-1 disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-hairline-strong;
+  }
+  .card {
+    @apply bg-canvas text-ink rounded-lg shadow-level-1 border border-hairline p-6 transition-shadow hover:shadow-level-2;
+  }
+  .card-lg {
+    @apply bg-canvas text-ink rounded-xl shadow-level-2 border border-hairline p-8 transition-shadow hover:shadow-level-3;
+  }
+  .input-base {
+    @apply bg-canvas text-ink border border-hairline rounded-md px-3 py-2 outline-none focus:border-ink focus:ring-1 focus:ring-ink transition-all disabled:bg-canvas-soft disabled:text-mute;
+  }
+}
