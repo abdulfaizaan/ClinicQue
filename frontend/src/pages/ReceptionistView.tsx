@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bell, SkipForward, Settings, UserPlus, WifiOff, Database, Pause, Play } from 'lucide-react';
+import { Bell, SkipForward, Settings, UserPlus, WifiOff, Database, Pause, Play, MessageCircle } from 'lucide-react';
 import { useClinicQueueSocket } from '../hooks/useClinicQueueSocket';
 import { toast } from 'sonner';
 
@@ -199,13 +199,25 @@ export default function ReceptionistView() {
             </button>
             
             {currentPatient && (
-              <button 
-                onClick={handleSkipCurrent}
-                disabled={!isConnected}
-                className="mt-4 text-body-sm text-on-primary/60 hover:text-on-primary underline decoration-on-primary/30 flex items-center gap-1 disabled:opacity-50"
-              >
-                <SkipForward size={14} /> Skip (No Show)
-              </button>
+              <div className="flex items-center justify-center gap-6 mt-4">
+                <button 
+                  onClick={handleSkipCurrent}
+                  disabled={!isConnected}
+                  className="text-body-sm text-on-primary/60 hover:text-on-primary underline decoration-on-primary/30 flex items-center gap-1 disabled:opacity-50"
+                >
+                  <SkipForward size={14} /> Skip (No Show)
+                </button>
+                {currentPatient.phone && (
+                  <a 
+                    href={`https://wa.me/${currentPatient.phone}?text=${encodeURIComponent(`Hi ${currentPatient.name}, it is your turn to see ${activeDoctor?.name}. Please proceed to ${activeDoctor?.room} now.`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-body-sm text-green-300 hover:text-green-100 flex items-center gap-1 transition-colors"
+                  >
+                    <MessageCircle size={14} /> WhatsApp
+                  </a>
+                )}
+              </div>
             )}
           </motion.div>
 
@@ -384,14 +396,27 @@ export default function ReceptionistView() {
                             {Math.round(getCumulativeETA(index))}m
                           </p>
                         </div>
-                        <button 
-                          onClick={() => handleSkipSpecific(patient.id)}
-                          disabled={!isConnected}
-                          className="text-mute hover:text-error transition-colors p-2 opacity-0 group-hover:opacity-100 focus:opacity-100 disabled:opacity-0"
-                          title="Remove patient"
-                        >
-                          <SkipForward size={18} />
-                        </button>
+                        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity">
+                          {patient.phone && (
+                            <a 
+                              href={`https://wa.me/${patient.phone}?text=${encodeURIComponent(`Hi ${patient.name}, your token number is ${patient.tokenNumber} for ${activeDoctor?.name}. Your estimated wait time is currently ${Math.round(getCumulativeETA(index))} minutes.`)}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-green-600 hover:text-green-500 bg-green-50 p-2 rounded-full transition-colors"
+                              title="Send WhatsApp Update"
+                            >
+                              <MessageCircle size={16} />
+                            </a>
+                          )}
+                          <button 
+                            onClick={() => handleSkipSpecific(patient.id)}
+                            disabled={!isConnected}
+                            className="text-error bg-error-soft hover:bg-error/20 p-2 rounded-full transition-colors disabled:opacity-50"
+                            title="Remove patient"
+                          >
+                            <SkipForward size={16} />
+                          </button>
+                        </div>
                       </div>
                     </motion.div>
                   ))
