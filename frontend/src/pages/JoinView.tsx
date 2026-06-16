@@ -30,6 +30,15 @@ export default function JoinView() {
         alert(res.message || 'Error joining queue.');
         return;
       }
+
+      const tkn = res?.tokenNumber;
+      if (tkn && 'speechSynthesis' in window) {
+        const text = `Check-in successful. ${res?.patientName || 'You'} are token number ${tkn}.`;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.95;
+        window.speechSynthesis.speak(utterance);
+      }
+
       setIsSubmitted(true);
       
       // Store which doctor they selected so PatientView knows what to show

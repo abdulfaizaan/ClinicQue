@@ -240,7 +240,7 @@ io.on('connection', (socket) => {
     sendWhatsAppMessage(phone, `Hello ${name}, your Token is #${tkn}. Est. wait: ${estWait} mins. Track live here: http://clinic.com/patient`);
 
     broadcastState();
-    if (typeof callback === 'function') callback({ status: 'success' });
+    if (typeof callback === 'function') callback({ status: 'success', tokenNumber: tkn, patientName: name });
   });
 
   socket.on('call_next', ({ doctorId }, callback) => {
