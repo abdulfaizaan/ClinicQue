@@ -54,7 +54,8 @@ app.get('/api/analytics', (req, res) => {
 });
 
 // --- State Management with SQLite ---
-const db = new Database('clinic.db');
+const dbPath = process.env.DB_PATH || 'clinic.db';
+const db = new Database(dbPath);
 db.pragma('journal_mode = WAL');
 
 const ipRateLimits = new Map();
