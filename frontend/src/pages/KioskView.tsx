@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useClinicQueueSocket } from '../hooks/useClinicQueueSocket';
 import { Volume2, Activity, Pause } from 'lucide-react';
+import QRCode from 'react-qr-code';
 
 export default function KioskView() {
   const { isConnected, queueData } = useClinicQueueSocket();
@@ -54,11 +55,29 @@ export default function KioskView() {
           <h1 className="text-display-lg font-bold text-white/90 tracking-tight leading-none">ClinicQueue</h1>
           <p className="text-body-lg text-mute mt-2">Live Waiting Room</p>
         </div>
-        <div className={`flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border ${isConnected ? 'border-success/30 text-success' : 'border-error/30 text-error'}`}>
-          <Activity size={24} className={isConnected ? 'animate-pulse' : ''} />
-          <span className="text-body-lg font-mono uppercase tracking-widest font-semibold">
-            {isConnected ? 'System Live' : 'Offline'}
-          </span>
+        
+        <div className="flex items-center gap-8">
+          {/* QR Code Widget */}
+          <div className="flex items-center gap-4 bg-white/5 p-3 rounded-xl border border-white/10">
+            <div className="bg-white p-1.5 rounded-lg shadow-inner">
+              <QRCode 
+                value={`${window.location.origin}/join`} 
+                size={56}
+                level="L"
+              />
+            </div>
+            <div className="text-left hidden md:block">
+              <p className="text-body-sm font-bold text-white tracking-wide">Self Check-in</p>
+              <p className="text-caption text-mute font-mono mt-0.5">Scan to join queue</p>
+            </div>
+          </div>
+
+          <div className={`flex items-center gap-3 px-6 py-4 rounded-xl bg-white/5 border ${isConnected ? 'border-success/30 text-success' : 'border-error/30 text-error'}`}>
+            <Activity size={20} className={isConnected ? 'animate-pulse' : ''} />
+            <span className="text-body-sm font-mono uppercase tracking-widest font-semibold">
+              {isConnected ? 'Live' : 'Offline'}
+            </span>
+          </div>
         </div>
       </div>
 

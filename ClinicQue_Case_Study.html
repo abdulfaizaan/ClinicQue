@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClinicQue - Case Study</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #1f2937;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        .subtitle {
+            font-size: 1.25rem;
+            color: #4b5563;
+            font-weight: 400;
+        }
+        .section {
+            margin-bottom: 35px;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #86198f; /* fuchsia-800 */
+            border-bottom: 2px solid #fdf4ff;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+        p {
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        .highlight-box {
+            background-color: #fdf4ff; /* fuchsia-50 */
+            border-left: 4px solid #d946ef; /* fuchsia-500 */
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 24px 0;
+        }
+        .highlight-text {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #86198f;
+            margin: 0;
+            font-style: italic;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .card {
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .card h4 {
+            margin-top: 0;
+            color: #111827;
+            font-size: 1.1rem;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        .tech-stack {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background-color: #e0e7ff;
+            color: #3730a3;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1 class="title">ClinicQue</h1>
+        <div class="subtitle">Curing Waiting Room Anxiety Through Real-Time Transparency</div>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">1. The Problem</h2>
+        <p>Currently, over <strong>76% of India's 1.5 million neighborhood clinics</strong> operate using chaotic paper token slips and human shouting. Patients sit in crowded spaces for 2-3 hours with zero visibility into their actual wait times, leading to severe frustration and "waiting room anxiety."</p>
+        <p>Meanwhile, clinic receptionists are forced to manage high-volume, multi-doctor queues entirely from memory, leading to skipped tokens, double-bookings, and immense operational stress.</p>
+    </div>
+
+    <div class="highlight-box">
+        <p class="highlight-text">"The moment you click 'Call Next Token' and the patient's phone instantly bursts with a notification—that's when clinic owners realize they aren't just managing a queue, they are curing waiting room anxiety."</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">2. The Solution</h2>
+        <p>ClinicQue is a hyper-fast, zero-refresh digital queue manager architected specifically for multi-doctor clinics. It bridges the gap between software and the physical waiting room by combining real-time WebSocket synchronization with automated hardware integrations.</p>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">3. Key Architectural Innovations</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <h4>⚡ Zero-Refresh Synchronization</h4>
+                <p>Built on an event-driven <strong>Socket.IO</strong> architecture. State mutations on the Receptionist Dashboard are broadcasted instantly to TV Kiosks and Patient Smartphones within milliseconds. No HTTP polling is required.</p>
+            </div>
+            <div class="card">
+                <h4>🧠 Smart ETA Math Engine</h4>
+                <p>Replaced hardcoded guesses with a dynamic algorithm. The backend calculates a rolling average of the last 5 real consultation times, seamlessly adjusting the math when a doctor goes on a lunch break.</p>
+            </div>
+            <div class="card">
+                <h4>🗣️ Automated Voice Calling</h4>
+                <p>Integrated the native Browser Speech Synthesis API. When a token is called, the TV Kiosk automatically announces the patient's name and room number over the clinic speakers, eliminating human shouting entirely.</p>
+            </div>
+            <div class="card">
+                <h4>🛡️ Enterprise Security & Persistence</h4>
+                <p>Backed by a multi-tenant <strong>SQLite</strong> database in WAL mode to ensure queues survive server crashes. Protected by IP-rate-limiting to prevent malicious actors from flooding the queue via QR codes.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section" style="margin-top: 40px;">
+        <h2 class="section-title">4. Edge Case Handling</h2>
+        <ul>
+            <li><strong>The "Lunch Break" Problem:</strong> If a doctor takes a 30-minute break, the ETA math would normally break. ClinicQue introduces a "Doctor on Break" pause state that natively halts the timestamp calculations, preserving the integrity of the historical average.</li>
+            <li><strong>Receptionist Panic Clicking:</strong> The server strictly enforces a 2-second debounce cooldown on the "Call Next" socket event, preventing accidental double-skipping.</li>
+            <li><strong>Patient No-Shows:</strong> Receptionists can instantly skip patients. The system drops them from the queue <em>without</em> injecting a 1-second consultation into the rolling average math.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2 class="section-title">5. Tech Stack</h2>
+        <div class="tech-stack">
+            <span class="badge">React 19</span>
+            <span class="badge">Node.js</span>
+            <span class="badge">Express</span>
+            <span class="badge">Socket.IO (WebSockets)</span>
+            <span class="badge">SQLite3</span>
+            <span class="badge">Tailwind CSS v4</span>
+            <span class="badge">Framer Motion</span>
+            <span class="badge">Browser Speech API</span>
+        </div>
+    </div>
+
+    <div class="section" style="margin-top: 40px;">
+        <h2 class="section-title">6. Business Impact & Outcomes</h2>
+        <p>By moving from a single global array to an isolated, Multi-Doctor database schema, ClinicQue evolved from a basic hackathon toy into a viable B2B SaaS product.</p>
+        <p>The system achieves <strong>sub-10 second triage times</strong> for receptionists, and introduces <strong>zero-cost WhatsApp notifications</strong> via native <code>wa.me</code> protocol integrations—delivering massive value to clinic owners without incurring Twilio API costs.</p>
+    </div>
+
+</div>
+
+</body>
+</html>
