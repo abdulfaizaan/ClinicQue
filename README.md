@@ -12,10 +12,11 @@ ClinicQue is a live digital queue manager designed specifically for multi-doctor
 - **Anxiety-Free Patient Tracker:** Live ETA tracking, real-time position updates, and engaging micro-animations (like Confetti when it's your turn) that boost morale.
 - **Plausible Smart ETAs:** Wait times aren't hardcoded guesses. They are calculated dynamically based on real historical consultation data *and* the specific appointment type.
 
-### 👨‍⚕️ Multi-Doctor Architecture
+### 👨‍⚕️ Multi-Doctor Architecture & Voice Announcements
 - **Isolated Queues:** A single clinic can host an unlimited number of doctors operating concurrently. 
 - **Tabbed Dashboard:** The Receptionist Dashboard supports instantly toggling between different doctors' queues without losing state or causing conflicts.
-- **Split-Screen Kiosk:** The waiting room TV automatically splits the screen to show live updates for every active doctor simultaneously, complete with Text-to-Speech audio announcements!
+- **Split-Screen Kiosk with AI Voice:** The waiting room TV automatically splits the screen to show live updates for every active doctor simultaneously.
+- **🗣️ Automated Voice Calling:** Uses the native Browser Speech Synthesis API to announce "Token number X, please proceed to Room Y" out loud over the clinic speakers whenever the receptionist hits "Call Next Token". No human shouting required!
 
 ### 🛡️ Enterprise-Grade Reliability
 - **"Doctor on Break" Mode:** Receptionists can pause a specific queue. The backend does the heavy mathematical lifting to pause the ETA calculations natively, ensuring the historical average is not corrupted by a doctor taking lunch!
